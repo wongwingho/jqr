@@ -6,4 +6,8 @@ else
   input=$(mktemp)
   cat >$input
 fi
- echo '' | fzf --print-query --preview "cat $input | jq {q}"
+echo '' | fzf --print-query --preview "cat $input | jq {q}"
+
+if (($# == 0)); then
+  rm $input
+fi
