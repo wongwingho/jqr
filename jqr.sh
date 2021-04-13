@@ -5,9 +5,7 @@ if (($# > 0)); then
 else
   input=$(mktemp)
   cat >$input
+  trap "rm -f $input" EXIT
 fi
-echo '' | fzf --print-query --preview "cat $input | jq -C {q}"
+echo '' | fzf  --print-query --preview  "jq -C {q} $input" | xargs -I{} jq {} $input
 
-if (($# == 0)); then
-  rm $input
-fi
